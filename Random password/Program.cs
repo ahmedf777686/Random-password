@@ -27,9 +27,12 @@ namespace Random_password
 			}
 
 		}
+
+
 		private static void GenerateRandomNumbers()
 		{
 			int Min = 0;
+			int Max = 0;
 			do
 			{
 				Console.WriteLine("Enter minimum Numbers");
@@ -37,17 +40,25 @@ namespace Random_password
 
 			} while (!int.TryParse(Console.ReadLine(), out Min));
 
-			int Max = 0;
-			do
+
+			Console.WriteLine("Enter maximum number:");
+			while (!int.TryParse(Console.ReadLine(), out Max) || Max <= Min)
 			{
-				Console.WriteLine("Enter maximum Numbers");
+				if (Max <= Min)
+				{
+					Console.WriteLine("Maximum number must be greater than minimum number. Please enter a valid maximum number:");
+				}
+				else
+				{
+					Console.WriteLine("Invalid input. Please enter a valid integer for the maximum number:");
+				}
+			}
 
-
-			} while (!int.TryParse(Console.ReadLine(), out Max));
 
 			var random = new Random();
 			var result = random.Next(Min, Max);
-			Console.WriteLine(result);
+			Console.WriteLine($"Random number between {Min} and {Max}: {result}");
+
 		}
 
 		private static void GenerateRandomString()
